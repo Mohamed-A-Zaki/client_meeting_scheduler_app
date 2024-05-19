@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export default function Header() {
   const list = [
@@ -33,8 +34,12 @@ export default function Header() {
       </ul>
 
       <div className="flex items-center gap-6">
-        <Button variant={"ghost"}>Login</Button>
-        <Button>Get Started</Button>
+        <Link href={"/login"}>
+          <Button variant={"ghost"}>Login</Button>
+        </Link>
+        <Link href={"/register"}>
+          <Button>Get Started</Button>
+        </Link>
       </div>
     </div>
   );
