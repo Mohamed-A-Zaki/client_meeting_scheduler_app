@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -63,9 +64,9 @@ export default function Hero() {
       </div>
 
       <div className="my-5">
-        <span className="text-primary cursor-pointer">
+        <Link href="/register" className="text-primary cursor-pointer">
           sign up free with email.
-        </span>{" "}
+        </Link>{" "}
         no credit card required
       </div>
     </div>
