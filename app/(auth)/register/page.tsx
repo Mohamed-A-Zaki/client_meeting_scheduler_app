@@ -1,18 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import Image from "next/image";
 import Link from "next/link";
+import { Form } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+
 import useRegister from "@/hooks/useRegister";
+
+import Heading from "@/components/auth/Heading";
+import CustomRegisterInput from "@/components/auth/CustomRegisterInput";
 import GoogleAndFacebookButtons from "@/components/auth/GoogleAndFacebookButtons";
 
 export default function Login() {
@@ -21,76 +16,43 @@ export default function Login() {
   return (
     <Form {...form}>
       <form
+        noValidate
         onSubmit={form.handleSubmit(onSubmit)}
         className="w-[500px] max-w-full border p-5 my-20 mx-auto rounded-md"
       >
-        <h2 className="text-center text-primary text-3xl font-semibold mb-5">
-          Register
-        </h2>
+        <Heading>Create account</Heading>
 
-        <div className="my-3">
-          <FormField
-            control={form.control}
-            name="f_name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>First Name</FormLabel>
-                <FormControl>
-                  <Input type="text" placeholder="first name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        <CustomRegisterInput
+          control={form.control}
+          label={"First Name"}
+          type={"text"}
+          placeholder={"first name"}
+          name="f_name"
+        />
 
-        <div className="my-3">
-          <FormField
-            control={form.control}
-            name="l_name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Last Name</FormLabel>
-                <FormControl>
-                  <Input type="text" placeholder="last name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        <CustomRegisterInput
+          control={form.control}
+          label={"Last Name"}
+          type={"text"}
+          placeholder={"last name"}
+          name="l_name"
+        />
 
-        <div className="my-3">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input type="email" placeholder="Email" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        <CustomRegisterInput
+          control={form.control}
+          label={"Email"}
+          type={"email"}
+          placeholder={"Email"}
+          name="email"
+        />
 
-        <div className="my-3">
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input type="password" placeholder="Password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        <CustomRegisterInput
+          control={form.control}
+          label={"Password"}
+          type={"password"}
+          placeholder={"Password"}
+          name="password"
+        />
 
         <Button type="submit" className="w-full my-3 py-6">
           Continue

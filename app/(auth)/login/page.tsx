@@ -1,18 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import Image from "next/image";
 import Link from "next/link";
+import { Form } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+
 import useLogin from "@/hooks/useLogin";
+
+import Heading from "@/components/auth/Heading";
+import CustomLoginInput from "@/components/auth/CustomLoginInput";
 import GoogleAndFacebookButtons from "@/components/auth/GoogleAndFacebookButtons";
 
 export default function Login() {
@@ -21,25 +16,26 @@ export default function Login() {
   return (
     <Form {...form}>
       <form
+        noValidate
         onSubmit={form.handleSubmit(onSubmit)}
         className="w-[500px] max-w-full border p-5 my-20 mx-auto rounded-md"
       >
-        <h2 className="text-center text-primary text-3xl font-semibold mb-5">
-          Login
-        </h2>
+        <Heading>Login</Heading>
 
-        <FormField
+        <CustomLoginInput
           control={form.control}
+          label={"Email"}
+          type={"email"}
+          placeholder={"Email"}
           name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="Email" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+        />
+
+        <CustomLoginInput
+          control={form.control}
+          label={"Password"}
+          type={"password"}
+          placeholder={"Password"}
+          name="password"
         />
 
         <Button type="submit" className="w-full my-3 py-6">
