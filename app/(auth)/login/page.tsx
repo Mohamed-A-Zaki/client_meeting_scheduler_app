@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Link from "next/link";
 import useLogin from "@/hooks/useLogin";
+import GoogleAndFacebookButtons from "@/components/auth/GoogleAndFacebookButtons";
 
 export default function Login() {
   const { form, onSubmit } = useLogin();
@@ -47,22 +48,7 @@ export default function Login() {
 
         <div className="text-center">Or</div>
 
-        <div className="flex flex-row items-center justify-center my-3 gap-5">
-          <Button className="py-6 flex gap-3 !bg-[#EBEBEB] text-black flex-1">
-            <Image src="/google.png" alt="google logo" width={30} height={30} />
-            Continue with google
-          </Button>
-
-          <Button className="py-6 flex gap-3 !bg-[#EBEBEB] text-black flex-1">
-            <Image
-              src="/facebook.png"
-              alt="facebook logo"
-              width={30}
-              height={30}
-            />
-            Continue with facebook
-          </Button>
-        </div>
+        <GoogleAndFacebookButtons />
 
         <div className="text-center">
           No account?{" "}
