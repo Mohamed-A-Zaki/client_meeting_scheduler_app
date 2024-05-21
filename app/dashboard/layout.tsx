@@ -1,3 +1,4 @@
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import Sidebar from "@/components/dashboard/Sidebar";
 
 type Props = {
@@ -8,7 +9,10 @@ export default function DashboardLayout({ children }: Props) {
   return (
     <div className="flex">
       <Sidebar />
-      {children}
+      <div className="flex-1">
+        <DashboardHeader />
+        {children}
+      </div>
     </div>
   );
 }
