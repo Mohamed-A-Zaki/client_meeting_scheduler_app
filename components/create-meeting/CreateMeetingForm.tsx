@@ -34,7 +34,7 @@ export default function CreateMeetingForm() {
   const { form, onSubmit } = useCreateMeetingForm();
 
   return (
-    <div className="shadow-md w-[500px] min-h-screen p-8">
+    <div className="shadow-md w-[500px] max-w-full min-h-screen p-8">
       <Link href="/dashboard" className="flex gap-2 items-center">
         <ChevronLeft />
         cancel
