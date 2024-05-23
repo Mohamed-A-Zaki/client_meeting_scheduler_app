@@ -136,7 +136,10 @@ export default function CreateMeetingForm() {
                 <FormItem>
                   <FormLabel>add {form.watch("location")} url</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input
+                      placeholder={`add ${form.watch("location")} url`}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
