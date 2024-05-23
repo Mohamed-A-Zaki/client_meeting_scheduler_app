@@ -46,9 +46,11 @@ export default function Sidebar() {
         className="w-[200px] cursor-pointer block m-auto"
       />
 
-      <Button className="bg-primary w-full rounded-full my-7">
-        <Plus /> Create
-      </Button>
+      <Link href="/create-meeting">
+        <Button className="bg-primary w-full rounded-full my-7">
+          <Plus /> Create
+        </Button>
+      </Link>
 
       <div>
         {links.map(({ href, id, Icon, text }) => {
