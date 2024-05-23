@@ -24,9 +24,12 @@ export default function MeetingSlots() {
 
   return (
     <div className="max-h-[500px] overflow-auto p-3">
-      {createTimeSlot(+(duration || 60)).map((ele) => {
+      {createTimeSlot(+(duration || 60)).map((ele, indx) => {
         return (
-          <div className="w-full border border-primary text-primary rounded-md p-2 text-center my-2 cursor-pointer hover:bg-primary hover:text-white">
+          <div
+            key={indx}
+            className="w-full border border-primary text-primary rounded-md p-2 text-center my-2 cursor-pointer hover:bg-primary hover:text-white"
+          >
             {ele}
           </div>
         );
