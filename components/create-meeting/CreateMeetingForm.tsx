@@ -1,13 +1,14 @@
 "use client";
 
-import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { ChevronLeft } from "lucide-react";
 
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
 import {
   Form,
   FormControl,
@@ -25,54 +26,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import Image from "next/image";
-
-const FormSchema = z.object({
-  event_name: z.string().min(3),
-  duration: z.enum(["30", "45", "60"]),
-  location: z.enum(["zoom", "meet", "phone", "other"]),
-  url: z.string().url(),
-});
+import ThemeOptions from "./ThemeOptions";
+import locations from "@/utils/locations";
+import useCreateMeetingForm from "@/hooks/useCreateMeetingForm";
 
 export default function CreateMeetingForm() {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      event_name: "",
-      duration: undefined,
-      location: undefined,
-      url: "",
-    },
-  });
-
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
-  }
-
-  const locations = [
-    {
-      id: 1,
-      src: "/zoom.png",
-      value: "zoom",
-    },
-    {
-      id: 2,
-      src: "/meet.png",
-      value: "meet",
-    },
-    {
-      id: 3,
-      src: "/phone.png",
-      value: "phone",
-    },
-    {
-      id: 4,
-      src: "/other.png",
-      value: "other",
-    },
-  ];
+  const { form, onSubmit } = useCreateMeetingForm();
 
   return (
     <div className="shadow-md w-[500px] min-h-screen p-8">
@@ -184,6 +143,8 @@ export default function CreateMeetingForm() {
               )}
             />
           )}
+
+          <ThemeOptions />
 
           <Button type="submit" className="bg-primary w-full">
             Submit
