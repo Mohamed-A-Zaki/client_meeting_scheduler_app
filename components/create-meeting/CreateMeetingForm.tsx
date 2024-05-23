@@ -26,10 +26,14 @@ import {
 } from "@/components/ui/select";
 
 import { Input } from "@/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import Image from "next/image";
 
 const FormSchema = z.object({
   event_name: z.string().min(3),
-  duration: z.string(),
+  duration: z.enum(["30", "45", "60"]),
+  location: z.enum(["zoom", "meet", "phone", "other"]),
+  url: z.string().url(),
 });
 
 export default function CreateMeetingForm() {
@@ -37,6 +41,9 @@ export default function CreateMeetingForm() {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       event_name: "",
+      duration: undefined,
+      location: undefined,
+      url: "",
     },
   });
 
@@ -44,8 +51,31 @@ export default function CreateMeetingForm() {
     console.log(data);
   }
 
+  const locations = [
+    {
+      id: 1,
+      src: "/zoom.png",
+      value: "zoom",
+    },
+    {
+      id: 2,
+      src: "/meet.png",
+      value: "meet",
+    },
+    {
+      id: 3,
+      src: "/phone.png",
+      value: "phone",
+    },
+    {
+      id: 4,
+      src: "/other.png",
+      value: "other",
+    },
+  ];
+
   return (
-    <div className="shadow-md w-[500px] h-screen p-8">
+    <div className="shadow-md w-[500px] min-h-screen p-8">
       <Link href="/dashboard" className="flex gap-2 items-center">
         <ChevronLeft />
         cancel
@@ -95,7 +125,69 @@ export default function CreateMeetingForm() {
             )}
           />
 
-          <Button type="submit">Submit</Button>
+          <FormField
+            control={form.control}
+            name="location"
+            render={({ field }) => (
+              <FormItem className="space-y-3">
+                <FormLabel>Location *</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-row"
+                  >
+                    {locations.map(({ id, src, value }) => {
+                      return (
+                        <FormItem className="flex items-center flex-1" key={id}>
+                          <FormControl className="hidden">
+                            <RadioGroupItem value={value} />
+                          </FormControl>
+                          <FormLabel
+                            className={`font-normal border w-full rounded-md p-3 flex flex-col items-center cursor-pointer hover:bg-blue-100 hover:border-primary
+                            ${
+                              form.getValues().location === value &&
+                              "border-primary bg-blue-100"
+                            }
+                            `}
+                          >
+                            <Image
+                              src={src}
+                              alt="zoom"
+                              width={30}
+                              height={30}
+                            />
+                            {value}
+                          </FormLabel>
+                        </FormItem>
+                      );
+                    })}
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {form.getValues().location && (
+            <FormField
+              control={form.control}
+              name="url"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>add {form.watch("location")} url</FormLabel>
+                  <FormControl>
+                    <Input placeholder="shadcn" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
+
+          <Button type="submit" className="bg-primary w-full">
+            Submit
+          </Button>
         </form>
       </Form>
     </div>
