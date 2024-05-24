@@ -11,7 +11,7 @@ import {
 
 export default function DashboardHeader() {
   return (
-    <div className="p-3 border-b flex justify-end">
+    <div className="p-3 flex justify-end">
       <DropdownMenu>
         <DropdownMenuTrigger>
           <div className="flex items-center">
