@@ -11,7 +11,7 @@ export default function DashboardLayout({ children }: Props) {
       <Sidebar />
       <div className="flex-1">
         <DashboardHeader />
-        {children}
+        <div className="p-5">{children}</div>
       </div>
     </div>
   );
